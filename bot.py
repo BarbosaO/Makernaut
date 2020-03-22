@@ -20,15 +20,32 @@ async def on_ready():
         if filename.endswith('.py'):
             bot.load_extension(f'cogs.{filename[:-3]}')
             print(f'- {(filename[:-3]).title()} commands loaded')
+    
+    #Set status
+    await bot.change_presence(status = discord.Status.online, activity=discord.Game("Read to Help!"))
             
 @bot.event
 async def on_disconnect():
     print('Bot Disconnected...')
 
 @bot.command()
-async def reload(ctx, extension = 'Utility'):
+async def load(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
+    await ctx.send(f'{extension.title()} cog has been loaded')
+
+@bot.command()
+async def unload(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
+    await ctx.send(f'{extension.title()} cog was unloaded')
+
+@bot.command()
+async def reload(ctx):
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            bot.unload_extension(f'cogs.{filename[:-3]}')
+            bot.load_extension(f'cogs.{filename[:-3]}')
+            print(f'- {(filename[:-3]).title()} commands reloaded')
+    await ctx.send(f'Cogs reloaded succesfully')
 
 if __name__ == "__main__":   
     bot.run(secret_key)

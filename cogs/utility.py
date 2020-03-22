@@ -20,5 +20,8 @@ class Utilities(commands.Cog):
     async def ping(self, ctx):
         await ctx.send(f'--Pong! That took {round(self.bot.latency * 1000)}ms')
 
+    #@commands.command()
+    #async def clear(self, ctx, amount):
+
 def setup(bot):
-    bot.add_cog(Utilities(bot))
+    bot.add_cog(Utilities(bot)) 
