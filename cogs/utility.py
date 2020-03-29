@@ -11,9 +11,9 @@ class Utilities(commands.Cog):
         self.bot = bot
 
     #Events
-    @commands.Cog.listener()
-    async def function():
-        pass
+    # @commands.Cog.listener()
+    # async def function():
+    #     pass
         
     #Commands
     @commands.command()
